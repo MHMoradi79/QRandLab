@@ -8,7 +8,7 @@ setup(
     description="Comprehensive Software for Managing, Preprocessing, Extracting and Statistical Testing of RNG Files",
     author="M. H. Moradi",
     author_email="m.moradi1379@gmail.com",
-    # url="https://github.com/yourname/yourproject",
+    url= "https://github.com/MHMoradi79/QRandLab"
     long_description=open("README.md").read(),
     packages=find_packages(),
     python_requires=">=3.8",
