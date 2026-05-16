@@ -1,0 +1,4 @@
+# Build the standalone executable
+
+pyinstaller --onefile --clean --add-data "src/QRandLab/assets/aboutus.png;assets/images" --add-data "src/QRandLab/assets/logo.png;assets/images" --add-data "src/QRandLab/third_party/bin/QRNG.dll;third_party/bin" --add-data "src/QRandLab/third_party/bin/TZ.exe;third_party/bin" --add-data "src/QRandLab/third_party/bin/ent.exe;third_party/bin" --add-data "src/QRandLab/third_party/bin/dieharder.exe;third_party/bin" --add-data "src/QRandLab/html_templates;html_templates" --collect-all=tkinterweb --icon=src/QRandLab/assets/icon.png --name QRandLab src/main.py
+

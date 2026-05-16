@@ -1,0 +1,126 @@
+<div class="section">
+    <h2>Tests Tab</h2>
+    <p>The Tests tab provides access to various statistical randomness tests. Each test evaluates different aspects of data quality and can run on single or multiple files.</p>
+    
+    <h3>File Selection</h3>
+    <ul>
+        <li><strong>All Files:</strong> Run the selected test on all loaded files</li>
+        <li><strong>Single File:</strong> Select a specific file to test</li>
+        <li><strong>Auto-convert to required format:</strong> Automatically convert files to the format required by each test</li>
+    </ul>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>ENT Test</h2>
+    <p>Entropy analysis using the external ENT tool. Provides quick statistical analysis of randomness quality.</p>
+    <p><strong>Required Format:</strong> binary</p>
+    
+    <h3>ENT Settings</h3>
+    <ul>
+        <li><strong>Bit stream mode:</strong> Analyze data as individual bits instead of bytes</li>
+        <li><strong>Occurrence count:</strong> Include byte/bit frequency distribution</li>
+        <li><strong>Fold:</strong> Fold uppercase letters to lowercase before analysis</li>
+        <li><strong>CSV output:</strong> Generate output in comma-separated format</li>
+        <li><strong>Save raw output:</strong> Save the raw ENT output to a file</li>
+    </ul>
+    
+    <h3>ENT Results</h3>
+    <ul>
+        <li><strong>Entropy:</strong> Bits of information per byte (max 8.0 for bytes, 1.0 for bits)</li>
+        <li><strong>Chi-square:</strong> Measures deviation from expected distribution</li>
+        <li><strong>Mean:</strong> Average value (ideal: 127.5 for bytes, 0.5 for bits)</li>
+        <li><strong>Monte Carlo Pi:</strong> Pi estimation using random coordinates</li>
+        <li><strong>Serial Correlation:</strong> Measures relationship between consecutive values</li>
+    </ul>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>NIST Statistical Test Suite</h2>
+    <p>Comprehensive battery of 16 tests from NIST SP800-22 for evaluating cryptographic random number generators.</p>
+    <p><strong>Required Format:</strong> string01</p>
+    
+    <h3>NIST Settings</h3>
+    <ul>
+        <li><strong>Enabled Tests:</strong> Select which of the 16 tests to run</li>
+        <li><strong>Sequence Length:</strong> Number of bits per test sequence (default: 1,000,000)</li>
+        <li><strong>Use Whole Data:</strong> Use entire file instead of specified sequence length</li>
+        <li><strong>P-value Threshold:</strong> Significance level for pass/fail (default: 0.01)</li>
+    </ul>
+    
+    <h3>NIST Tests Available</h3>
+    <ul>
+        <li><strong>1. Frequency:</strong> Proportion of 0s and 1s</li>
+        <li><strong>2. Block Frequency:</strong> Proportion within blocks</li>
+        <li><strong>3. Runs:</strong> Oscillation between 0s and 1s</li>
+        <li><strong>4. Longest Run:</strong> Longest run of 1s in blocks</li>
+        <li><strong>5. Rank:</strong> Matrix rank test</li>
+        <li><strong>6. FFT:</strong> Spectral test (frequency domain)</li>
+        <li><strong>7. Non-overlapping Template:</strong> Aperiodic pattern matching</li>
+        <li><strong>8. Overlapping Template:</strong> Periodic pattern matching</li>
+        <li><strong>9. Universal:</strong> Compressibility test</li>
+        <li><strong>10. Linear Complexity:</strong> LFSR complexity</li>
+        <li><strong>11. Serial:</strong> Frequency of patterns</li>
+        <li><strong>12. Approximate Entropy:</strong> Regularity measure</li>
+        <li><strong>13. Cumulative Sums:</strong> Random walk deviation</li>
+        <li><strong>14. Random Excursions:</strong> Random walk returns</li>
+        <li><strong>15. Random Excursions Variant:</strong> Random walk visits</li>
+    </ul>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>Dieharder Test Suite</h2>
+    <p>Comprehensive battery of 32 randomness tests. Very thorough but time-consuming (30-60 minutes for all tests).</p>
+    <p><strong>Required Format:</strong> binary</p>
+    
+    <h3>Dieharder Settings</h3>
+    <ul>
+        <li><strong>Test Mode:</strong> Run all 32 tests or select specific ones</li>
+        <li><strong>P-samples:</strong> Number of p-values to generate (default: 100)</li>
+        <li><strong>T-entities:</strong> Number of test entities (default: 10000)</li>
+        <li><strong>KS Mode:</strong> Kolmogorov-Smirnov test mode</li>
+        <li><strong>Weak Threshold:</strong> P-value below which result is "WEAK"</li>
+        <li><strong>Fail Threshold:</strong> P-value below which result is "FAIL"</li>
+        <li><strong>Test Strategy:</strong> Standard, Resolve Ambiguity, or Test to Destruction</li>
+    </ul>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>Borel Normality Test</h2>
+    <p>Tests for Borel normality - whether all possible patterns appear with expected frequency.</p>
+    <p><strong>Required Format:</strong> string01</p>
+    
+    <h3>Borel Settings</h3>
+    <ul>
+        <li><strong>Min Pattern Length:</strong> Minimum pattern size to test (default: 1)</li>
+        <li><strong>Max Pattern Length:</strong> Maximum pattern size to test (default: 10)</li>
+        <li><strong>Auto Mode:</strong> Automatically determine maximum based on data size</li>
+    </ul>
+    
+    <h3>Borel Results</h3>
+    <p>For each pattern length, reports chi-square ratio and fraction ratio. Overall PASS/FAIL based on whether all pattern lengths pass.</p>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>Autocorrelation Test</h2>
+    <p>Analyzes correlation between bits at different lag distances. Ideal random data shows no correlation.</p>
+    <p><strong>Required Format:</strong> string01</p>
+    
+    <h3>Autocorrelation Settings</h3>
+    <ul>
+        <li><strong>Max Lag:</strong> Maximum lag distance to compute (default: 100)</li>
+        <li><strong>Use Whole Data:</strong> Use all data instead of a sample</li>
+    </ul>
+    
+    <h3>Autocorrelation Results</h3>
+    <p>Generates a plot showing correlation coefficients at each lag. Values should be close to zero for random data.</p>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h3>Tips</h3>
+    <ul>
+        <li>Enable "Auto-convert" if your files are not in the required format</li>
+        <li>Start with faster tests (ENT, Borel) before running lengthy ones (Dieharder)</li>
+        <li>Results are automatically added to the Report tab for export</li>
+        <li>Multi-file tests show per-file results in the status section</li>
+    </ul>
+</div>

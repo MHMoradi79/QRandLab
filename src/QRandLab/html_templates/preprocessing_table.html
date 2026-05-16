@@ -1,0 +1,23 @@
+<div class="report-container">
+  <div class="report-header">Preprocessing Operations</div>
+  <div class="card">
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Algorithm</th>
+        <th>Input File</th>
+        <th>Output File</th>
+        <th>Status</th>
+      </tr>
+      {% for op in operations %}
+      <tr>
+        <td>{{ op.timestamp }}</td>
+        <td>{{ op.algorithm }}</td>
+        <td>{{ op.input_file }}</td>
+        <td>{{ op.output_file }}</td>
+        <td>{{ op.status_text }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>

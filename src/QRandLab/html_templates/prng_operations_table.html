@@ -1,0 +1,25 @@
+<div class="report-container">
+  <div class="report-header">PRNG Operations</div>
+  <div class="card">
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Generator</th>
+        <th>Seed</th>
+        <th>Files</th>
+        <th>Size/File</th>
+        <th>Output Path</th>
+      </tr>
+      {% for op in operations %}
+      <tr>
+        <td>{{ op.timestamp }}</td>
+        <td>{{ op.generator }}</td>
+        <td>{{ op.seed }}</td>
+        <td>{{ op.num_files }}</td>
+        <td>{{ op.size_per_file }}</td>
+        <td style="text-align:left; font-size:12px;">{{ op.output_path }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>

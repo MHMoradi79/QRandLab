@@ -1,0 +1,84 @@
+<div class="report-container">
+  <div class="report-header">ENT Entropy Analysis Results</div>
+  {% for test in tests %}
+  <div class="card" style="margin-bottom:15px;">
+    <h3 style="margin-top:0;">{{ test.file_name }} <span style="font-size:12px; color:{{ muted }};">({{ test.timestamp }})</span></h3>
+    
+    {% if test.results.parsed and (test.results.parsed.entropy is not none or test.results.parsed.file_size is not none) %}
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+        <th>Assessment</th>
+      </tr>
+      {% if test.results.parsed.file_size is not none %}
+      <tr>
+        <td class="test-name-cell">File Size</td>
+        <td>{{ test.results.parsed.file_size }} {{ test.results.parsed.file_unit | default('bytes') }}</td>
+        <td>-</td>
+      </tr>
+      {% endif %}
+      {% if test.results.parsed.entropy is not none %}
+      {% set max_entropy = 1.0 if test.results.options.binary else 8.0 %}
+      {% set entropy_excellent = max_entropy * 0.9875 %}
+      {% set entropy_good = max_entropy * 0.9375 %}
+      <tr>
+        <td class="test-name-cell">Entropy</td>
+        <td>{{ "%.6f"|format(test.results.parsed.entropy) }} {{ test.results.parsed.entropy_unit | default('bits per byte') }}</td>
+        <td class="result-cell {% if test.results.parsed.entropy >= entropy_excellent %}result-pass{% elif test.results.parsed.entropy >= entropy_good %}result-warning{% else %}result-fail{% endif %}">
+          {% if test.results.parsed.entropy >= entropy_excellent %}EXCELLENT{% elif test.results.parsed.entropy >= entropy_good %}GOOD{% else %}LOW{% endif %}
+        </td>
+      </tr>
+      {% endif %}
+      {% if test.results.parsed.compression_reduction is not none %}
+      <tr>
+        <td class="test-name-cell">Compression Potential</td>
+        <td>{{ "%.1f"|format(test.results.parsed.compression_reduction) }}%</td>
+        <td class="result-cell {% if test.results.parsed.compression_reduction <= 1 %}result-pass{% elif test.results.parsed.compression_reduction <= 5 %}result-warning{% else %}result-fail{% endif %}">
+          {% if test.results.parsed.compression_reduction <= 1 %}PASS{% elif test.results.parsed.compression_reduction <= 5 %}WEAK{% else %}FAIL{% endif %}
+        </td>
+      </tr>
+      {% endif %}
+      {% if test.results.parsed.chi_square is not none %}
+      <tr>
+        <td class="test-name-cell">Chi-Square</td>
+        <td>{{ "%.2f"|format(test.results.parsed.chi_square) }}{% if test.results.parsed.chi_square_exceed_percent is not none %} (exceed {{ test.results.parsed.chi_square_exceed_percent }}%){% endif %}</td>
+        <td class="result-cell {% if test.results.parsed.chi_square_exceed_percent is not none %}{% if test.results.parsed.chi_square_exceed_percent > 1 %}result-pass{% elif test.results.parsed.chi_square_exceed_percent > 0.01 %}result-warning{% else %}result-fail{% endif %}{% endif %}">
+          {% if test.results.parsed.chi_square_exceed_percent is not none %}{% if test.results.parsed.chi_square_exceed_percent > 1 %}PASS{% elif test.results.parsed.chi_square_exceed_percent > 0.01 %}WEAK{% else %}FAIL{% endif %}{% else %}-{% endif %}
+        </td>
+      </tr>
+      {% endif %}
+      {% if test.results.parsed.mean is not none %}
+      <tr>
+        <td class="test-name-cell">Arithmetic Mean</td>
+        <td>{{ "%.4f"|format(test.results.parsed.mean) }} (ideal: {{ test.results.parsed.mean_ideal | default(127.5) }})</td>
+        <td class="result-cell {% set mean_ideal = test.results.parsed.mean_ideal if test.results.parsed.mean_ideal is not none else 127.5 %}{% set mean_dev = ((test.results.parsed.mean - mean_ideal)|abs / mean_ideal * 100) if mean_ideal else 0 %}{% if mean_dev <= 1 %}result-pass{% elif mean_dev <= 5 %}result-warning{% else %}result-fail{% endif %}">
+          {% if mean_dev <= 1 %}PASS{% elif mean_dev <= 5 %}WEAK{% else %}FAIL{% endif %}
+        </td>
+      </tr>
+      {% endif %}
+      {% if test.results.parsed.monte_carlo_pi is not none %}
+      <tr>
+        <td class="test-name-cell">Monte Carlo Pi</td>
+        <td>{{ "%.6f"|format(test.results.parsed.monte_carlo_pi) }}{% if test.results.parsed.monte_carlo_error_percent is not none %} (error: {{ test.results.parsed.monte_carlo_error_percent }}%){% endif %}</td>
+        <td class="result-cell {% if test.results.parsed.monte_carlo_error_percent is not none %}{% if test.results.parsed.monte_carlo_error_percent <= 0.5 %}result-pass{% elif test.results.parsed.monte_carlo_error_percent <= 1 %}result-warning{% else %}result-fail{% endif %}{% endif %}">
+          {% if test.results.parsed.monte_carlo_error_percent is not none %}{% if test.results.parsed.monte_carlo_error_percent <= 0.5 %}PASS{% elif test.results.parsed.monte_carlo_error_percent <= 1 %}WEAK{% else %}FAIL{% endif %}{% else %}-{% endif %}
+        </td>
+      </tr>
+      {% endif %}
+      {% if test.results.parsed.serial_correlation is not none %}
+      <tr>
+        <td class="test-name-cell">Serial Correlation</td>
+        <td>{{ "%.6f"|format(test.results.parsed.serial_correlation) }}</td>
+        <td class="result-cell {% if (test.results.parsed.serial_correlation|abs) < 0.01 %}result-pass{% elif (test.results.parsed.serial_correlation|abs) < 0.05 %}result-warning{% else %}result-fail{% endif %}">
+          {% if (test.results.parsed.serial_correlation|abs) < 0.01 %}PASS{% elif (test.results.parsed.serial_correlation|abs) < 0.05 %}WEAK{% else %}FAIL{% endif %}
+        </td>
+      </tr>
+      {% endif %}
+    </table>
+    {% else %}
+    <pre class="pre">{{ test.results.output | default('No output available') }}</pre>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

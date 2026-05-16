@@ -1,0 +1,25 @@
+<div class="report-container">
+  <div class="report-header">Input Files</div>
+  <div class="card">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Size</th>
+        <th>Extension</th>
+        <th>Validation</th>
+        <th>Directory</th>
+      </tr>
+      {% for file in files %}
+      <tr>
+        <td>{{ file.file_name }}</td>
+        <td>{{ file.file_type }}</td>
+        <td>{{ file.file_size }}</td>
+        <td>{{ file.file_ext }}</td>
+        <td>{{ file.validation }}</td>
+        <td style="text-align:left; font-size:12px;">{{ file.file_dir }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>

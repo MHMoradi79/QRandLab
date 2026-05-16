@@ -1,0 +1,63 @@
+<div class="section">
+    <h2>Input Tab</h2>
+    <p>The Input tab is your starting point for working with files in QRandLab. It allows you to import, manage, and validate multiple files for randomness testing and processing.</p>
+    
+    <h3>File Table</h3>
+    <p>The main area displays all loaded files in a table with the following columns:</p>
+    <ul>
+        <li><strong>Name:</strong> The file name without extension</li>
+        <li><strong>Folder:</strong> The directory path where the file is located</li>
+        <li><strong>Ext:</strong> The file extension (.bin, .txt, .dat, etc.)</li>
+        <li><strong>Size:</strong> File size in human-readable format (KB, MB, etc.)</li>
+        <li><strong>Type:</strong> The data format type (binary, string01, hex, uint8, etc.)</li>
+    </ul>
+    
+    <h3>File Types</h3>
+    <p>Understanding file types is crucial for proper testing. Each type represents how data is stored:</p>
+    <ul>
+        <li><strong>binary:</strong> Raw binary data (bytes). Used by ENT and Dieharder tests.</li>
+        <li><strong>string01:</strong> Text file containing only '0' and '1' characters. Used by NIST, Borel, and Autocorrelation tests.</li>
+        <li><strong>hex:</strong> Hexadecimal text representation of data</li>
+        <li><strong>uint8:</strong> Unsigned 8-bit integers (0-255) in text format</li>
+        <li><strong>uint16:</strong> Unsigned 16-bit integers (0-65535) in text format</li>
+        <li><strong>uint32:</strong> Unsigned 32-bit integers in text format</li>
+        <li><strong>uint64:</strong> Unsigned 64-bit integers in text format</li>
+    </ul>
+    
+    <h3>Action Buttons</h3>
+    <ul>
+        <li><strong>+ Add Files:</strong> Opens a file dialog to select one or more files to import</li>
+        <li><strong>- Remove:</strong> Removes selected files from the table (does not delete actual files)</li>
+        <li><strong>Validate Files:</strong> Checks all files to ensure their content matches their declared type</li>
+        <li><strong>Restart:</strong> Restarts the entire application</li>
+        <li><strong>Reset:</strong> Clears all files and resets the tab to its initial state</li>
+    </ul>
+    
+    <h3>Context Menu (Right-Click)</h3>
+    <p>Right-clicking on a file row shows additional options:</p>
+    <ul>
+        <li><strong>Open Folder:</strong> Opens the file's directory in your system file explorer</li>
+        <li><strong>Open File:</strong> Opens the file with your system's default application</li>
+        <li><strong>Rename:</strong> Rename the file on disk</li>
+        <li><strong>Read Sample:</strong> View a sample of the file's contents (first N bytes)</li>
+        <li><strong>Set Type:</strong> Manually change the file's data type (options depend on extension)</li>
+    </ul>
+    
+    <h3>Type Assignment Rules</h3>
+    <p>File types are assigned based on extension:</p>
+    <ul>
+        <li><strong>.bin, .dat files:</strong> Automatically set to "binary" type</li>
+        <li><strong>.txt files:</strong> Can be any text-based type (string01, hex, uint8, etc.). The system attempts to auto-detect the format.</li>
+    </ul>
+    
+    <h3>Status Section</h3>
+    <p>The status area at the bottom displays operation results, validation messages, and any errors that occur during file operations.</p>
+    
+    <h3>Tips</h3>
+    <ul>
+        <li>Double-click a file row to quickly change its type</li>
+        <li>Use Validate Files before running tests to ensure data integrity</li>
+        <li>Hover over a row to see the full file path in a tooltip</li>
+        <li>You can select multiple files by holding Ctrl or Shift while clicking</li>
+    </ul>
+</div>

@@ -1,0 +1,45 @@
+<div class="report-container">
+  <div class="report-header">NIST SP 800-22 Statistical Test Results</div>
+  {% for test in tests %}
+  <div class="card" style="margin-bottom:15px;">
+    <h3 style="margin-top:0;">{{ test.file_name }} <span style="font-size:12px; color:{{ muted }};">({{ test.timestamp }})</span></h3>
+    
+    {% if test.results.rows %}
+    <p style="margin-bottom:10px;"><strong>Sequence Length:</strong> {{ test.results.sequence_length | default('N/A') }} bits | <strong>Tests:</strong> {{ test.results.passed_tests | default(0) }}/{{ test.results.total_tests | default(0) }} passed</p>
+    <table>
+      <tr>
+        <th style="width:40px;">#</th>
+        <th>Test Name</th>
+        <th>P-Value</th>
+        <th>Result</th>
+      </tr>
+      {% for row in test.results.rows %}
+      <tr class="{% if row.passed %}pass{% elif row.has_error or row.is_warning %}{% else %}fail{% endif %}">
+        <td>{{ row.test_number }}</td>
+        <td class="test-name-cell">{{ row.test_name }}</td>
+        <td>{{ row.p_value }}</td>
+        <td class="result-cell {% if row.passed %}result-pass{% elif row.is_warning %}result-warning{% elif row.has_error %}result-warning{% else %}result-fail{% endif %}">{{ row.result_text }}</td>
+      </tr>
+      {% if row.has_subtests and row.subtests %}
+      {% for sub in row.subtests %}
+      <tr class="{% if sub.passed %}pass{% else %}fail{% endif %}" style="font-size:12px;">
+        <td></td>
+        <td class="test-name-cell" style="padding-left:30px;">State {{ sub.state }}</td>
+        <td>{{ sub.p_value }}</td>
+        <td class="result-cell {% if sub.passed %}result-pass{% else %}result-fail{% endif %}">{{ sub.result_text }}</td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+    </table>
+    <p style="margin-top:15px;font-size:16px;"><strong>Overall Result:</strong> 
+      <span class="result-cell {% if test.results.passed_tests == test.results.total_tests %}result-pass{% elif test.results.passed_tests == 0 %}result-fail{% else %}result-warning{% endif %}" style="font-size:16px;font-weight:700;">
+        {% if test.results.passed_tests == test.results.total_tests %}PASS{% elif test.results.passed_tests == 0 %}FAIL{% else %}PARTIAL ({{ test.results.passed_tests }}/{{ test.results.total_tests }}){% endif %}
+      </span>
+    </p>
+    {% else %}
+    <pre class="pre">{{ test.results.output | default('No output available') }}</pre>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

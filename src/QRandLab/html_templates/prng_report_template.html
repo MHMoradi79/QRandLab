@@ -1,0 +1,15 @@
+<div class="report-container">
+  <div class="report-header">PRNG Report</div>
+  <div class="card FC-report">
+    <ul>
+      <li><span>Generator ID:</span> {{ generator_id }}</li>
+      <li><span>Generator Name:</span> {{ generator_name }}</li>
+      <li><span>Seed:</span> {{ seed }}</li>
+      <li><span>Number of Files:</span> {{ num_files }}</li>
+      <li><span>Size per File:</span> {{ size_per_file }}</li>
+      <li><span>Total Files Generated:</span> {{ total_generated }}</li>
+      <li><span>Timestamp:</span> {{ timestamp }}</li>
+      <li><span>Status:</span> <span class="{% if status_ok %}result-pass{% else %}result-fail{% endif %}">{{ status_text }}</span></li>
+    </ul>
+  </div>
+</div>

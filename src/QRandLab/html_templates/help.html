@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help Index</title>
+    {% include 'common_styles.html' %}
+    <style>
+        .help-index { display: flex; gap: 24px; align-items: flex-start }
+        .help-list { width: 420px }
+        .help-frame { flex: 1; min-height: 600px; border: 1px solid #ddd; border-radius: 8px; overflow:auto }
+        .help-list ul { list-style: none; padding-left: 8px }
+        .help-list li { margin: 6px 0 }
+        .help-list a { color: var(--accent); text-decoration: none }
+        .help-list a:hover { text-decoration: underline }
+        .nested { margin-left: 16px }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">Application Help</div>
+        <div class="card help-index">
+            <div class="help-list">
+                <h3>Contents</h3>
+                <nav>
+                <ul>
+                    {%- for section in help_sections %}
+                        <li>
+                            <strong>{{ section.title }}</strong>
+                            {% if section.children %}
+                            <ul class="nested">
+                                {% for child in section.children %}
+                                <li><a href="help_sections/{{ child.file }}" target="help_frame">{{ child.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                    {%- endfor %}
+                </ul>
+                </nav>
+            </div>
+
+            <div class="help-frame">
+                <!-- The links open here (target name 'help_frame') -->
+                <iframe name="help_frame" frameborder="0" style="width:100%;height:100%;border:0;"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

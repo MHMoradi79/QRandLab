@@ -1,0 +1,16 @@
+<div class="report-container">
+  <div class="report-header">API QRNG Report</div>
+  <div class="card FC-report">
+    <ul>
+      <li><span>Provider:</span> {{ provider }}</li>
+      <li><span>Data Type:</span> {{ data_type }}</li>
+      <li><span>Length Requested:</span> {{ length }}</li>
+      <li><span>Length Received:</span> {{ received_length }}</li>
+      {% if block_size %}
+      <li><span>Block Size:</span> {{ block_size }}</li>
+      {% endif %}
+      <li><span>Timestamp:</span> {{ timestamp }}</li>
+      <li><span>Status:</span> <span class="{% if status_ok %}result-pass{% else %}result-fail{% endif %}">{{ status_text }}</span></li>
+    </ul>
+  </div>
+</div>

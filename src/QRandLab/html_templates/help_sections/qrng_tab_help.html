@@ -1,0 +1,118 @@
+<div class="section">
+    <h2>QRNG Tab</h2>
+    <p>The QRNG (Quantum Random Number Generator) tab provides access to various sources of random data. It contains three inner tabs: Internet APIs, EYL Device, and PRNG.</p>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>Internet APIs</h2>
+    <p>Fetch quantum random data from online QRNG services. Three providers are supported:</p>
+    
+    <h3>Available Providers</h3>
+    <ul>
+        <li><strong>ANU (Australian National University):</strong> Quantum random numbers from vacuum fluctuations. Requires API key. Max length: 1024. Supports uint8, uint16, hex16 data types.</li>
+        <li><strong>Random.org:</strong> True random numbers from atmospheric noise. Requires API key. Max length: 10000. Supports uint8 data type.</li>
+        <li><strong>HotBits:</strong> Random numbers from radioactive decay. Free service with limits. Max length: 759. Supports uint8 data type.</li>
+    </ul>
+    
+    <h3>API Settings</h3>
+    <ul>
+        <li><strong>Length:</strong> Number of random values to fetch (provider-specific limits apply)</li>
+        <li><strong>Data Type:</strong> Format of returned data (uint8, uint16, hex16 - availability varies by provider)</li>
+        <li><strong>Block Size:</strong> For ANU only when using hex16. Valid range: 1-10. Disabled for other data types.</li>
+        <li><strong>API Key:</strong> Required for ANU and Random.org. Not needed for HotBits.</li>
+    </ul>
+    
+    <h3>Actions</h3>
+    <ul>
+        <li><strong>Fetch:</strong> Request random data from the selected provider</li>
+        <li><strong>Save:</strong> Save fetched data to a file (enabled after successful fetch)</li>
+        <li><strong>Reset:</strong> Clear status and reset settings to defaults</li>
+    </ul>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>EYL Device</h2>
+    <p>Interface for the EYL quantum random number generator hardware device. Requires the EYL DLL to be properly installed.</p>
+    
+    <h3>Generation Modes</h3>
+    <ul>
+        <li><strong>Offline:</strong> Generate files locally without streaming. Specify filename, number of files, and size per file.</li>
+        <li><strong>Display:</strong> View incoming random data in real-time. Optionally save to file.</li>
+        <li><strong>Stream:</strong> Send random data over network (TCP). Can stream to localhost or custom LAN address.</li>
+    </ul>
+    
+    <h3>Offline Mode Settings</h3>
+    <ul>
+        <li><strong>Base Filename:</strong> Name prefix for generated files (e.g., "eyl_data" produces eyl_data_001.bin)</li>
+        <li><strong>Number of Files:</strong> How many files to generate</li>
+        <li><strong>File Size (bits):</strong> Size of each file in bits</li>
+        <li><strong>Output Format:</strong> Data format (binary, string01, hex, uint8, uint16, uint32, uint64)</li>
+    </ul>
+    
+    <h3>Stream Mode Settings</h3>
+    <ul>
+        <li><strong>Buffer Size:</strong> Bytes per read request (max: 16384)</li>
+        <li><strong>Pause Time:</strong> Milliseconds between device requests (0-10000). Use higher values to avoid -4 errors on high buffer sizes.</li>
+        <li><strong>Network:</strong> localhost or LAN (custom)</li>
+        <li><strong>Host/Port:</strong> Network address for streaming (default: 127.0.0.1:4000)</li>
+        <li><strong>Save sent data:</strong> Optionally save streamed data to file</li>
+    </ul>
+    
+    <h3>Connection</h3>
+    <ul>
+        <li><strong>Check DLL:</strong> Verify EYL driver is installed and accessible</li>
+        <li><strong>Connect to EYL:</strong> Toggle device connection (enabled after DLL check passes)</li>
+    </ul>
+    
+    <h3>Save Options</h3>
+    <ul>
+        <li><strong>Save Folder:</strong> Directory where files will be saved</li>
+        <li><strong>Base Name:</strong> Filename prefix for saved data</li>
+        <li><strong>Add Timestamp:</strong> Include date/time in filename</li>
+    </ul>
+    
+    <hr style="margin: 20px 0; border-color: #444;">
+    
+    <h2>PRNG (Pseudo-Random Number Generator)</h2>
+    <p>Generate pseudo-random data using the DieHarder library's PRNG algorithms. Useful for testing and comparison with true random sources.</p>
+    
+    <h3>DieHarder PRNG Settings</h3>
+    <ul>
+        <li><strong>Generator ID:</strong> Algorithm identifier. Valid ranges: 0-61, 203-206, 400-405, 500-501</li>
+        <li><strong>Seed:</strong> Initial seed value for the generator (same seed produces same sequence)</li>
+        <li><strong>Number of Files:</strong> How many files to generate (max: 1000)</li>
+        <li><strong>Size per File:</strong> Bytes per file (max: 1GB)</li>
+    </ul>
+    
+    <h3>Common Generator IDs</h3>
+    <ul>
+        <li><strong>0:</strong> Borosh13</li>
+        <li><strong>1:</strong> CMRG (Combined Multiple Recursive Generator)</li>
+        <li><strong>13:</strong> Mersenne Twister (mt19937)</li>
+        <li><strong>14:</strong> MT19937-1999</li>
+        <li><strong>22:</strong> RANLUX (luxury level algorithms)</li>
+    </ul>
+    
+    <h3>Saving Options</h3>
+    <ul>
+        <li><strong>Include Header:</strong> Add generator info at the start of each file</li>
+        <li><strong>Generator ID in filename:</strong> Include the algorithm ID in the filename</li>
+        <li><strong>Seed in filename:</strong> Include the seed value in the filename</li>
+        <li><strong>Base name:</strong> Filename prefix (default: "prng")</li>
+    </ul>
+    
+    <h3>Actions</h3>
+    <ul>
+        <li><strong>Start:</strong> Begin generating PRNG data</li>
+        <li><strong>Stop:</strong> Cancel ongoing generation</li>
+        <li><strong>Save Path:</strong> Choose output directory</li>
+        <li><strong>Reset:</strong> Clear status and reset to defaults</li>
+    </ul>
+    
+    <h3>Tips</h3>
+    <ul>
+        <li>PRNG data is deterministic - the same seed and generator always produce identical output</li>
+        <li>Use PRNG for baseline testing or when you need reproducible "random" data</li>
+        <li>Files are saved directly to disk as they are generated (no need for separate save step)</li>
+    </ul>
+</div>

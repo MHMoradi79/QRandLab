@@ -1,0 +1,81 @@
+<div class="section">
+    <h2>Converter Tab</h2>
+    <p>The Converter tab transforms random data files between different formats. It supports batch conversion of multiple files with consistent settings.</p>
+    
+    <h3>Supported Formats</h3>
+    <ul>
+        <li><strong>binary:</strong> Raw binary data (bytes). Most compact format. Used by ENT and Dieharder tests.</li>
+        <li><strong>string01:</strong> Text file containing only '0' and '1' characters. Required by NIST, Borel, and Autocorrelation tests.</li>
+        <li><strong>hex:</strong> Hexadecimal text representation (e.g., "4F A3 2B...")</li>
+        <li><strong>uint8:</strong> Space-separated 8-bit unsigned integers (0-255)</li>
+        <li><strong>uint16:</strong> Space-separated 16-bit unsigned integers (0-65535)</li>
+        <li><strong>uint32:</strong> Space-separated 32-bit unsigned integers</li>
+        <li><strong>uint64:</strong> Space-separated 64-bit unsigned integers</li>
+    </ul>
+    
+    <h3>File Selection</h3>
+    <ul>
+        <li><strong>All Files:</strong> Convert all files loaded in the Input tab</li>
+        <li><strong>Single File:</strong> Select a specific file to convert individually</li>
+        <li><strong>Source Types:</strong> Displays the format(s) of currently selected files</li>
+    </ul>
+    
+    <h3>Conversion Options</h3>
+    <ul>
+        <li><strong>Convert To:</strong> Target format for conversion</li>
+        <li><strong>Output Tag:</strong> Text appended to output filenames (e.g., "_hex" produces "data_hex.txt"). Leave empty for no tag.</li>
+        <li><strong>Add converted files to Input table:</strong> Automatically import the converted files into the Input tab for further processing</li>
+    </ul>
+    
+    <h3>Actions</h3>
+    <ul>
+        <li><strong>Convert:</strong> Execute the format conversion on selected files</li>
+        <li><strong>Save:</strong> Save converted files to disk (choose output directory)</li>
+        <li><strong>Reset:</strong> Clear results and reset all settings to defaults</li>
+    </ul>
+    
+    <h3>Conversion Matrix</h3>
+    <p>All formats can be converted to any other format. Common conversions:</p>
+    <table style="width: 100%; margin-top: 10px;">
+        <tr>
+            <th style="text-align: left; padding: 8px;">From</th>
+            <th style="text-align: left; padding: 8px;">To</th>
+            <th style="text-align: left; padding: 8px;">Use Case</th>
+        </tr>
+        <tr>
+            <td style="padding: 8px;">binary</td>
+            <td style="padding: 8px;">string01</td>
+            <td style="padding: 8px;">Prepare for NIST/Borel testing</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;">string01</td>
+            <td style="padding: 8px;">binary</td>
+            <td style="padding: 8px;">Prepare for ENT/Dieharder testing</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;">hex</td>
+            <td style="padding: 8px;">binary</td>
+            <td style="padding: 8px;">Convert hex dumps to raw bytes</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px;">uint8</td>
+            <td style="padding: 8px;">binary</td>
+            <td style="padding: 8px;">Convert integer lists to raw bytes</td>
+        </tr>
+    </table>
+    
+    <h3>Output Files</h3>
+    <ul>
+        <li>Text-based formats (string01, hex, uint*) are saved with <code>.txt</code> extension</li>
+        <li>Binary format is saved with <code>.bin</code> extension</li>
+        <li>Original files are never modified - new files are created</li>
+    </ul>
+    
+    <h3>Tips</h3>
+    <ul>
+        <li>Converting to string01 increases file size significantly (8x for binary to string01)</li>
+        <li>Converting to binary produces the most compact files</li>
+        <li>Use "Add to Input table" to chain conversions with other operations</li>
+        <li>The status section shows per-file conversion results with success/failure indicators</li>
+    </ul>
+</div>

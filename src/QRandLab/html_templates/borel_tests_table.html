@@ -1,0 +1,40 @@
+<div class="report-container">
+  <div class="report-header">Borel Normality Test Results</div>
+  {% for test in tests %}
+  <div class="card" style="margin-bottom:15px;">
+    <h3 style="margin-top:0;">{{ test.file_name }} <span style="font-size:12px; color:{{ muted }};">({{ test.timestamp }})</span></h3>
+    
+    {% if test.results.rows %}
+    <p style="margin-bottom:10px;">
+      <strong>Sequence Length:</strong> {{ test.results.sequence_length | default('N/A') }} bits |
+      <strong>Max Pattern Length:</strong> {{ test.results.max_pattern_length | default('N/A') }}
+    </p>
+    <table>
+      <tr>
+        <th>Pattern Length</th>
+        <th>Chi-Square (χ²)</th>
+        <th>Critical Value (α=0.05)</th>
+        <th>Result</th>
+      </tr>
+      {% for row in test.results.rows %}
+      {% if row.is_final %}
+      <tr class="final-row {% if row.passed %}pass-final{% else %}fail-final{% endif %}">
+        <td class="summary-cell" colspan="3">{{ row.pattern_length }}</td>
+        <td style="font-weight:700;font-size:16px;color:#fff;">{{ row.result_text }}</td>
+      </tr>
+      {% else %}
+      <tr class="{% if row.passed %}pass{% else %}fail{% endif %}">
+        <td>{{ row.pattern_length }}</td>
+        <td class="chi-cell">{{ row.chi_square }}</td>
+        <td class="chi-cell">{{ row.critical_value }}</td>
+        <td class="result-cell {% if row.passed %}result-pass{% else %}result-fail{% endif %}">{{ row.result_text }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+    {% else %}
+    <pre class="pre">{{ test.results.output | default('No output available') }}</pre>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>

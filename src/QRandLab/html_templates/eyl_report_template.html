@@ -1,0 +1,21 @@
+<div class="report-container">
+  <div class="report-header">EYL Hardware QRNG Report</div>
+  <div class="card FC-report">
+    <ul>
+      <li><span>Mode:</span> {{ mode }}</li>
+      {% if mode == 'offline' %}
+      <li><span>Number of Files:</span> {{ num_files }}</li>
+      <li><span>File Size (bits):</span> {{ file_size_bits }}</li>
+      <li><span>Total Files Generated:</span> {{ total_generated }}</li>
+      {% elif mode == 'display' %}
+      <li><span>Data Displayed:</span> Continuous stream</li>
+      {% elif mode == 'stream' %}
+      <li><span>Host:</span> {{ host }}</li>
+      <li><span>Port:</span> {{ port }}</li>
+      <li><span>Total Bytes Sent:</span> {{ total_bytes_sent }}</li>
+      {% endif %}
+      <li><span>Timestamp:</span> {{ timestamp }}</li>
+      <li><span>Status:</span> <span class="{% if status_ok %}result-pass{% else %}result-fail{% endif %}">{{ status_text }}</span></li>
+    </ul>
+  </div>
+</div>

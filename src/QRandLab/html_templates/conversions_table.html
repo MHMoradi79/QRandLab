@@ -1,0 +1,25 @@
+<div class="report-container">
+  <div class="report-header">File Conversions</div>
+  <div class="card">
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Input File</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Output File</th>
+        <th>Status</th>
+      </tr>
+      {% for conv in conversions %}
+      <tr>
+        <td>{{ conv.timestamp }}</td>
+        <td>{{ conv.input_file }}</td>
+        <td>{{ conv.input_type }}</td>
+        <td>{{ conv.output_type }}</td>
+        <td>{{ conv.output_file }}</td>
+        <td>{{ conv.status_text }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>

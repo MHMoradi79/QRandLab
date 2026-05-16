@@ -1,0 +1,25 @@
+<div class="report-container">
+  <div class="report-header">EYL Device Operations</div>
+  <div class="card">
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Mode</th>
+        <th>Files</th>
+        <th>Size/File</th>
+        <th>Format</th>
+        <th>Output Path</th>
+      </tr>
+      {% for op in operations %}
+      <tr>
+        <td>{{ op.timestamp }}</td>
+        <td>{{ op.mode }}</td>
+        <td>{{ op.num_files }}</td>
+        <td>{{ op.size_per_file }}</td>
+        <td>{{ op.output_format }}</td>
+        <td style="text-align:left; font-size:12px;">{{ op.output_path }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>

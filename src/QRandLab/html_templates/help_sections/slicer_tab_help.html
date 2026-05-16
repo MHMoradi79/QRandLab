@@ -1,0 +1,68 @@
+<div class="section">
+    <h2>Slicer Tab</h2>
+    <p>The Slicer tab extracts portions of data files for focused testing or analysis. It supports multiple slicing operations on single or multiple files.</p>
+    
+    <h3>Slicing Operations</h3>
+    <ul>
+        <li><strong>Single Slice:</strong> Extract a continuous portion of data from a specific position</li>
+        <li><strong>Equal Parts:</strong> Divide file(s) into N equal-sized segments</li>
+        <li><strong>Random Sampling:</strong> Extract random samples from the data</li>
+    </ul>
+    
+    <h3>Single Slice Parameters</h3>
+    <ul>
+        <li><strong>Start Position (bytes):</strong> Where to begin extraction (0 = start of file)</li>
+        <li><strong>Length (bytes):</strong> Number of bytes to extract</li>
+    </ul>
+    <p>Example: Start=1000, Length=5000 extracts bytes 1000-5999 from the file.</p>
+    
+    <h3>Equal Parts Parameters</h3>
+    <ul>
+        <li><strong>Number of Parts:</strong> How many equal segments to create (e.g., 4 parts from a 1MB file creates four 256KB files)</li>
+    </ul>
+    <p>Useful for testing different portions of large files independently.</p>
+    
+    <h3>Random Sampling Parameters</h3>
+    <ul>
+        <li><strong>Sample Size (bytes):</strong> Size of each random sample</li>
+        <li><strong>Number of Samples:</strong> How many random samples to extract</li>
+        <li><strong>Seed (optional):</strong> Random seed for reproducible sampling</li>
+    </ul>
+    <p>Samples are extracted from random positions within the file.</p>
+    
+    <h3>File Selection</h3>
+    <ul>
+        <li><strong>All Files:</strong> Apply slicing operation to all loaded files</li>
+        <li><strong>Single File:</strong> Select a specific file (shows file size for reference)</li>
+    </ul>
+    
+    <h3>Options</h3>
+    <ul>
+        <li><strong>Output Tag:</strong> Text appended to output filenames (e.g., "_slice" produces "data_slice_001.bin"). Leave empty for no tag.</li>
+        <li><strong>Add sliced files to Input table:</strong> Automatically add extracted slices to the Input tab for testing</li>
+    </ul>
+    
+    <h3>Actions</h3>
+    <ul>
+        <li><strong>Run:</strong> Execute the slicing operation</li>
+        <li><strong>Save:</strong> Save sliced data to disk (choose output directory)</li>
+        <li><strong>Reset:</strong> Clear results and reset all settings to defaults</li>
+    </ul>
+    
+    <h3>Output Naming</h3>
+    <p>Output files are named based on the operation:</p>
+    <ul>
+        <li><strong>Single Slice:</strong> <code>filename_tag.ext</code></li>
+        <li><strong>Equal Parts:</strong> <code>filename_tag_001.ext</code>, <code>filename_tag_002.ext</code>, etc.</li>
+        <li><strong>Random Sampling:</strong> <code>filename_tag_sample001.ext</code>, etc.</li>
+    </ul>
+    
+    <h3>Tips</h3>
+    <ul>
+        <li>Use Single Slice to extract specific regions of interest from large files</li>
+        <li>Equal Parts is useful for comparing randomness across different sections of a file</li>
+        <li>Random Sampling helps create representative subsets for quick testing</li>
+        <li>File type is preserved during slicing (binary stays binary, string01 stays string01)</li>
+        <li>The status section displays per-file results with the size of each extracted slice</li>
+    </ul>
+</div>
